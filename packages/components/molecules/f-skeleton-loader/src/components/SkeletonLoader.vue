@@ -34,7 +34,7 @@ export default {
             return this.$createElement(
                 'div',
                 {
-                    staticClass: `${this.$style[`c-skeleton-loader__${text}`]} ${this.$style['c-skeleton-loader__bone']}`
+                    staticClass: `${this.$style[`c-skeleton-loader-${text}`]} ${this.$style['c-skeleton-loader-bone']}`
                 },
                 children
             );
@@ -55,44 +55,42 @@ export default {
 
 <style lang="scss" module>
 
-$skeleton-loader-heading-height: 32px;
-$skeleton-loader-text-height: 16px;
+$skeleton-loader-heading-height: spacing(x4);
+$skeleton-loader-text-height: spacing(x2);
 
 .c-skeleton-loader {
   position: relative;
   vertical-align: top;
+}
 
-   &__bone {
-       border-radius: inherit;
-        overflow: hidden;
-        position: relative;
-        background-color: $grey--mid;
+.c-skeleton-loader-bone {
+    border-radius: inherit;
+    overflow: hidden;
+    position: relative;
+    background-color: $grey--mid;
+}
+.c-skeleton-loader-bone::after {
+    background: linear-gradient(90deg,hsla(0,0%,100%,0),hsla(0,0%,100%,.3),hsla(0,0%,100%,0));
+    animation: loading 1.5s infinite;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(-100%);
+    z-index: 1
+}
 
-        &::after {
-            background: linear-gradient(90deg,hsla(0,0%,100%,0),hsla(0,0%,100%,.3),hsla(0,0%,100%,0));
-
-            animation: loading 1.5s infinite;
-            content: '';
-            height: 100%;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            transform: translateX(-100%);
-            z-index: 1
-        }
-   }
-
-   &__heading {
+.c-skeleton-loader-heading {
     height: $skeleton-loader-heading-height;
     width: 45%;
-  }
+}
 
-  &__text {
+.c-skeleton-loader-text {
     flex: 1 0 auto;
     height: $skeleton-loader-text-height;
     margin-bottom: spacing();
-  }
 }
 
 @keyframes loading {

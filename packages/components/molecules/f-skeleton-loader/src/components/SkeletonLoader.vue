@@ -18,6 +18,17 @@ export default {
             }
         };
     },
+    computed: {
+        attrs () {
+            return {
+                'data-test-id': 'skeletonLoader',
+                'aria-busy': true,
+                'aria-live': 'polite',
+                role: 'alert',
+                ...this.$attrs
+            };
+        }
+    },
     methods: {
         genBone (text = this.skeletonType, children) {
             return this.$createElement(
@@ -33,9 +44,7 @@ export default {
         return createElement(
             'div', {
                 staticClass: this.$style['c-skeleton-loader'],
-                attrs: {
-                    'data-test-id': 'skeletonLoader'
-                }
+                attrs: this.attrs
             },
             [this.genBone()]
         );
@@ -58,6 +67,20 @@ $skeleton-loader-text-height: 16px;
         overflow: hidden;
         position: relative;
         background-color: $grey--mid;
+
+        &::after {
+            background: linear-gradient(90deg,hsla(0,0%,100%,0),hsla(0,0%,100%,.3),hsla(0,0%,100%,0));
+
+            animation: loading 1.5s infinite;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform: translateX(-100%);
+            z-index: 1
+        }
    }
 
    &__heading {
@@ -72,4 +95,7 @@ $skeleton-loader-text-height: 16px;
   }
 }
 
+@keyframes loading {
+  100% {  transform: translateX(100%) }
+}
 </style>

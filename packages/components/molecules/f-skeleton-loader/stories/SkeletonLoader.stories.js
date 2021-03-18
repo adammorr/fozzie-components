@@ -13,14 +13,14 @@ export const SkeletonLoaderComponent = (args, { argTypes }) => ({
 });
 
 SkeletonLoaderComponent.args = {
-    skeletonType: 'heading'
+    skeletonType: 'sentences'
 };
 
 SkeletonLoaderComponent.argTypes = {
     skeletonType: {
         control: {
             type: 'select',
-            options: ['heading', 'text']
+            options: ['heading', 'text', 'sentences', 'article']
         }
     }
 };
